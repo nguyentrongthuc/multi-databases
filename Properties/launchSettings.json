@@ -1,0 +1,58 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:52003",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "weatherforecast",
+      "applicationUrl": "http://172.16.20.106:52003",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      }
+    },
+    "LoggingService1": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "LoggingService1",
+      "applicationUrl": "http://localhost:50100",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development1"
+      }
+    },
+    "LoggingService2": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "LoggingService2",
+      "applicationUrl": "http://localhost:50102",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development2"
+      }
+    },
+    "LoggingService3": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "LoggingService3",
+      "applicationUrl": "http://localhost:50103",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development3"
+      }
+    },
+    "LoggingService4": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "LoggingService4",
+      "applicationUrl": "http://localhost:50104",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development4"
+      }
+    }
+  }
+}
