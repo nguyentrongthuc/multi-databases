@@ -3,7 +3,7 @@ using LoggingService.Models;
 
 namespace LoggingService.Services
 {
-    public interface IDbService
+    public interface ILogService
     {
         IEnumerable<Log> Get();
     }

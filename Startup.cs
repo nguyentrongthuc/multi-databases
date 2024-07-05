@@ -6,9 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Steeltoe.Discovery.Client;
 using ServiceCore.Models;
-using LoggingService.Services;
+using ServiceCore.Services;
 
 namespace LoggingService
 {
@@ -25,9 +24,7 @@ namespace LoggingService
         public IConfiguration Configuration { get; }
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            var abc = Configuration.GetConnectionString(LoggingService1ConnectionString);
-            System.Console.WriteLine(abc);
+        {            
             services.AddDbContext<Log1ApplicationDbContext>(
                 opt => opt.UseSqlServer(Configuration.GetConnectionString(LoggingService1ConnectionString)), ServiceLifetime.Transient);
             services.AddDbContext<Log2ApplicationDbContext>(
@@ -36,27 +33,12 @@ namespace LoggingService
                 opt => opt.UseSqlServer(Configuration.GetConnectionString(LoggingService3ConnectionString)), ServiceLifetime.Transient);
             services.AddDbContext<Log4ApplicationDbContext>(
                 opt => opt.UseSqlServer(Configuration.GetConnectionString(LoggingService4ConnectionString)), ServiceLifetime.Transient);
-            services.AddScoped<Log1DbService>();
-            services.AddScoped<Log2DbService>();
-            services.AddScoped<Log3DbService>();
-            services.AddScoped<Log4DbService>();
-            services.AddTransient<System.Func<string, IDbService>>(
-            serviceProvider => key =>
-            {
-                switch (key)
-                {
-                    case "Log1":
-                        return serviceProvider.GetService<Log1DbService>();
-                    case "Log2":
-                        return serviceProvider.GetService<Log2DbService>();
-                    case "Log3":
-                        return serviceProvider.GetService<Log3DbService>();
-                    case "Log4":
-                        return serviceProvider.GetService<Log4DbService>();
-                    default:
-                        return null;
-                }
-            });
+
+            services.AddCorsServices(Configuration);
+            services.AddIdentityServices(Configuration);
+            services.AddSwaggerRegister();
+            services.AddServiceDetails();
+
             services.AddHttpClient();
             services.AddHttpContextAccessor();
             services.Configure<Microsoft.AspNetCore.Http.Features.FormOptions>(o =>

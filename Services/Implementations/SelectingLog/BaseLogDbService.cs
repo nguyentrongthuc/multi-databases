@@ -5,7 +5,7 @@ using ServiceCore.Models;
 
 namespace LoggingService.Services
 {
-    public abstract class BaseLogDbService<TDbContext> : IDbService
+    public abstract class BaseLogDbService<TDbContext> : ILogService
     where TDbContext : BaseApplicationDbContext<TDbContext>
     {
         private readonly TDbContext _context;

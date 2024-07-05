@@ -1,3 +1,4 @@
+using LoggingService.Models;
 using LoggingService.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -11,23 +12,23 @@ namespace LoggingService.Controllers
         Authorize(Roles = "QUAN_TRI",
         AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)
     ]
-    public class LogController : ControllerBase
+    public class UpdatingLogController : ControllerBase
     {
-        private readonly System.Func<string, ILogService> _DbService;
-        public LogController(
-            System.Func<string, ILogService> service
+        private readonly System.Func<string, IUpdatingLogService> _DbService;
+        public UpdatingLogController(
+            System.Func<string, IUpdatingLogService> service
         )
         {
             _DbService = service;
         }
-        [HttpGet("{LogName}")]
-        public IActionResult Get([FromRoute] string LogName)
+        [HttpPost("{LogName}")]
+        public IActionResult Create([FromRoute] string LogName, [FromBody] Log log)
         {
             var service = _DbService(LogName);
             if (service != null)
             {
-                var result = service.Get();
-                return Ok(result);
+                service.Create(log);
+                return Ok();
             }
             return BadRequest("Log name khong ton tai");
         }
